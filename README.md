@@ -3,7 +3,7 @@ CKEditor 4 - Releases
 
 ## Releases Code
 
-This repository contains the official release versions of [CKEditor](http://ckeditor.com).
+This repository is based on the official release versions of [CKEditor](http://ckeditor.com) and includes all custom changes and plugins implemented for CGI OpenMedia product.
 
 There are four versions for each release &mdash; `standard-all`, `basic`, `standard`, and `full`.
 They differ in the number of plugins that are compiled into the main `ckeditor.js` file as well as the toolbar configuration.
