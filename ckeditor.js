@@ -410,6 +410,15 @@ this.attachListener(this, "dblclick", function (b) {
     }
     a.fire("doubleclick", b)
 });
+// TB-12898
+this.attachListener(this, "click", function (b) {
+    var e = b;
+    b = { element: b.data.getTarget() };
+    if (OMWClientContext.Story.HandleStoryClick(b.element, e.data.$)) {
+        return;
+    }
+    a.fire("click", b)
+});
 
 CKEDITOR.env.ie && this.attachListener(this, "click", b); CKEDITOR.env.ie && !CKEDITOR.env.edge || this.attachListener(this, "mousedown",
 function(b){var c=b.data.getTarget();c.is("img","hr","input","textarea","select")&&!c.isReadOnly()&&(a.getSelection().selectElement(c),c.is("input","textarea","select")&&b.data.preventDefault())});CKEDITOR.env.edge&&this.attachListener(this,"mouseup",function(b){(b=b.data.getTarget())&&b.is("img")&&!b.isReadOnly()&&a.getSelection().selectElement(b)});CKEDITOR.env.gecko&&this.attachListener(this,"mouseup",function(b){if(2==b.data.$.button&&(b=b.data.getTarget(),!b.getAscendant("table")&&!b.getOuterHtml().replace(D,

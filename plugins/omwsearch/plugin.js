@@ -1,7 +1,6 @@
 ﻿/*
-*
-* This Plugin streamlines editing issues (lost of font style in some situations) caused by RTF<->HTML conversion 
-* and the sometimes irregular HTML produced by it.
+* !!!important: the plugin should be checked for relevance and removed if not relevant
+* 
 * It is a lgitimate place to implement support of further text editing needed use cases.
 *
 */
@@ -52,57 +51,12 @@
                     }
                 }
             });
-            editor.on('contentDom', function () {
-                // Get font and set it as default
-                setDefaultFont(editor);
-            });
+
             editor.on('paste', function () {
                 contentPasted = true;
             });
         }
     });
-
-    function refreshContent(editor) {
-        dataRefreshed = true;
-        var data = editor.getData();
-
-        editor.setData(data);
-    }
-
-    var dataRefreshed = false;
-    function setDefaultFont(editor) {
-        if (!dataRefreshed) {
-
-            var size = $('#hdnFontSize').val();
-            var face = $('#hdnFontFace').val();
-
-            var css = "body{font-family:'" + face + "'; font-size:" + size + ";}";
-
-            editor.document.$.styleSheets = _.filter(editor.document.$.styleSheets, function (s) {
-                return s.cssRules[0].selectorText != "body"
-            })
-
-            editor.document.appendStyleText(css);
-
-            if (_.find(editor.document.$.styleSheets, function (s) {
-                return s.cssRules[0].selectorText != "body p:first-child"
-            })) {
-                editor.document.appendStyleText("body p:first-child{ margin: 0px; }");
-            }
-
-            //editor.dataProcessor.htmlFilter.addRules({
-            //    elements: {
-            //        div: function (e) { e.attributes.style = "font-family:'" + face + "'; font-size:" + size + ";"; },
-            //        p: function (e) { e.attributes.style = "font-family:'" + face + "'; font-size:" + size + ";"; }
-            //    }
-            //});
-
-            refreshContent(editor);
-        }
-        else {
-            dataRefreshed = false;
-        }
-    }
 
     function replaceRangeWithClosestEditableRoot(range, editor) {
 
